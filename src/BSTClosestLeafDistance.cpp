@@ -38,7 +38,8 @@ struct node{
   int data;
   struct node *right;
 };
-int min(int a, int b);
+
+/*int min(int a, int b);
 int avlht(struct node *p);
 
 int search(struct node *p, int a, int root_value, struct node *root, int i)
@@ -72,16 +73,16 @@ int search(struct node *p, int a, int root_value, struct node *root, int i)
 		search(p->right, a, root_value, root, i);
 	}
 }
-
+*/
 
 int get_closest_leaf_distance(struct node *root, struct node *temp)
 {
-	
-	 int min_value= search(root, temp->data, root->data, root, 0);
-	 return min_value;
+	return -1;
+	/* int min_value= search(root, temp->data, root->data, root, 0);
+	 return min_value;*/
 }
 
-int avlht(struct node *p)		// Calculating the height of the particular node
+/*int avlht(struct node *p)		// Calculating the height of the particular node
 {
 	if (p == NULL)
 		return 0;
@@ -102,4 +103,4 @@ int min(int a, int b)
 		return a;
 	else
 		return b;
-}
+}*/
