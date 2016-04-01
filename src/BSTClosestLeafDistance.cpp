@@ -38,8 +38,68 @@ struct node{
   int data;
   struct node *right;
 };
+int min(int a, int b);
+int avlht(struct node *p);
+
+int search(struct node *p, int a, int root_value, struct node *root, int i)
+{
+
+	int distance = 0;					//Find the min distance from leaf to the particular node 
+	if (a<p->data)
+	{
+		i = i + 1;
+		search(p->left, a, root_value, root, i);
+	}
+	if (a == p->data)
+	{
+		int distance_leaf = avlht(p) - 1;
+		//printf("Element found %d \n", a);
+		//printf("Height of that node =%d \n", distance_leaf);
+		if (a<root_value){
+			distance = avlht(root->right);
+			//printf("Height of the right subtree of the root= %d\n", distance);
+		}
+		else if (a>root_value){
+			distance = avlht(root->left);
+			//printf("Height of the left subtree of the root =%d\n", distance);
+		}
+		//printf("Height from root to the find node = %d\n", i);
+		//printf("Minimum of the distance from leaves to that particular node is %d", min(i + distance, distance_leaf));
+		return min(i + distance, distance_leaf);
+	}
+	if (a>p->data){
+		i = i + 1;
+		search(p->right, a, root_value, root, i);
+	}
+}
+
 
 int get_closest_leaf_distance(struct node *root, struct node *temp)
 {
-  return -1;
+	
+	 int min_value= search(root, temp->data, root->data, root, 0);
+	 return min_value;
+}
+
+int avlht(struct node *p)		// Calculating the height of the particular node
+{
+	if (p == NULL)
+		return 0;
+	else
+	{
+		int ldepth = avlht(p->left);
+		int rdepth = avlht(p->right);
+		if (ldepth >rdepth)
+			return ldepth + 1;
+		else
+			return rdepth + 1;
+	}
+}
+
+int min(int a, int b)
+{
+	if (a<b)
+		return a;
+	else
+		return b;
 }
